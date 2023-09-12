@@ -21,7 +21,6 @@ class Post
 
     public static function find($slug)
     {
-        // of all the blog posts find the one with the slug that matches the one that was requested
         $posts = static::all();
 
         return $posts->firstWhere('slug', $slug);
@@ -29,15 +28,18 @@ class Post
 
     public static function all()
     {
-        return collect(File::files(resource_path("posts")))
-            ->map(fn($file) => YamlFrontMatter::parseFile((string) $file))
-            ->map(fn($document) => new Post(
-                $document->title,
-                $document->body(),
-                $document->date,
-                $document->excerpt,
-                $document->slug
-            ));
+        return cache()->rememberForever('posts.all', function () {
+            return collect(File::files(resource_path("posts")))
+                ->map(fn($file) => YamlFrontMatter::parseFile((string) $file))
+                ->map(fn($document) => new Post(
+                    $document->title,
+                    $document->body(),
+                    $document->date,
+                    $document->excerpt,
+                    $document->slug
+                ))
+                ->sortByDesc('date');
+        });
     }
 
 }
