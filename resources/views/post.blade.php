@@ -1,3 +1,7 @@
+<?php
+/** @var \App\Models\Post $post */
+
+?>
 <!doctype html>
 
 <title>My Blog</title>
@@ -5,7 +9,12 @@
 
 <body>
 <article>
-    <?= $post ?>
+    <h1>
+        <?= $post->title ?>
+    </h1>
+    <div>
+        <?= $post->body ?>
+    </div>
 </article>
-<a href="./posts">Go back</a>
+<a href="/">Go back</a>
 </body>
