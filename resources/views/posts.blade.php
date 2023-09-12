@@ -1,23 +1,15 @@
-<!doctype html>
+<x-layout>
 
-<?php
-/** @var \App\Models\Post[] $posts */
-
-?>
-<title>My Blog</title>
-<link rel="stylesheet" href="/app.css">
-
-<body>
-@foreach ($posts as $post)
-<article class="{{ $loop->even ? 'foobar' : '' }}">
-    <h1>
-        <a href="/post/{{ $post->slug }}">
-            {{ $post->title}}
-        </a>
-    </h1>
-    <div>
-        {{ $post->excerpt }}
-    </div>
-</article>
-@endforeach
-</body>
+    @foreach ($posts as $post)
+    <article class="{{ $loop->even ? 'foobar' : '' }}">
+        <h1>
+            <a href="/post/{{ $post->slug }}">
+                {{ $post->title}}
+            </a>
+        </h1>
+        <div>
+            {{ $post->excerpt }}
+        </div>
+    </article>
+    @endforeach
+</x-layout>
