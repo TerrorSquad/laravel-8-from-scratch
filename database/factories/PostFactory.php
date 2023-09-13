@@ -25,6 +25,7 @@ class PostFactory extends Factory
             'title' => fake()->sentence(),
             'excerpt' => fake()->sentence(),
             'body' => fake()->paragraphs(3, true),
+            'published_at' => fake()->dateTimeBetween('-1 year'),
         ];
     }
 }
