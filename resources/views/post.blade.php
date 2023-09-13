@@ -1,3 +1,4 @@
+@props(['post'])
 <x-layout>
 
     <article>
