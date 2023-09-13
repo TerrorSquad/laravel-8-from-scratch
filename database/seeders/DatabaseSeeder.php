@@ -15,58 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::truncate();
-        Post::truncate();
-        Category::truncate();
-
-        $user = User::factory()->create();
-
-        $personal = Category::create([
-            'name' => 'Personal',
-            'slug' => 'personal',
+        User::factory()->create([
+            'name' => 'John Doe'
         ]);
 
-        $work = Category::create([
-            'name' => 'Work',
-            'slug' => 'work',
+        Post::factory(5)->create([
+            'user_id' => 1,
         ]);
-
-        $hobbies = Category::create([
-            'name' => 'Hobbies',
-            'slug' => 'hobbies',
-        ]);
-
-        Post::create(
-            [
-                'title' => 'My First Post',
-                'excerpt' => '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>',
-                'body' => '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>',
-                'slug' => 'my-first-post',
-                'category_id' => $personal->id,
-                'user_id' => $user->id,
-            ]
-        );
-
-        Post::create(
-            [
-                'title' => 'My Second Post',
-                'excerpt' => '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>',
-                'body' => '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>',
-                'slug' => 'my-second-post',
-                'category_id' => $work->id,
-                'user_id' => $user->id,
-            ]
-        );
-
-        Post::create(
-            [
-                'title' => 'My Third Post',
-                'excerpt' => '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>',
-                'body' => '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>',
-                'slug' => 'my-third-post',
-                'category_id' => $hobbies->id,
-                'user_id' => $user->id,
-            ]
-        );
     }
 }
