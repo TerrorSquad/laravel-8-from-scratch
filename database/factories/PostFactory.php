@@ -18,13 +18,17 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $paragraphs = $this->faker->paragraphs(random_int(4, 8));
+        $body = collect($paragraphs)->map(fn($paragraph) => "<p>$paragraph</p>")->implode('');
+        $excerpt = collect($paragraphs)->take(2)->map(fn($paragraph) => "<p>$paragraph</p>")->implode('');
+
         return [
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
             'slug' => fake()->slug(),
             'title' => fake()->sentence(),
-            'excerpt' => fake()->sentence(),
-            'body' => fake()->paragraphs(3, true),
+            'excerpt' => $excerpt,
+            'body' => $body,
             'published_at' => fake()->dateTimeBetween('-1 year'),
         ];
     }
