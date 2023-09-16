@@ -14,32 +14,25 @@
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
         <!--  Category -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
+            <x-dropdown>
 
+                <x-slot:trigger>
+                    <button @click.away="show = false" class="py-2 pl-3 pr-9 text-sm font-semibold w-full lg:w-40 text-left flex lg:inline-flex">
+                        {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Categories' }}
+                        <x-arrow-down class="absolute pointer-events-none" style="right: 12px;"/>
+                    </button>
+                </x-slot:trigger>
 
-            <div x-data="{ show: false }">
-                <button @click="show = !show" @click.away="show = false" class="py-2 pl-3 pr-9 text-sm font-semibold w-full lg:w-32 text-left flex lg:inline-flex">
-                    {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Categories' }}
-                    <x-arrow-down/>
-                </button>
+                <x-dropdown-item href="/">All</x-dropdown-item>
 
-                <div x-show="show" class="py-2 absolute bg-gray-100 mt-2 rounded-xl w-full z-50" style="display: none">
-                    <a
-                        href="/"
-                        class="block text-left px-3 text-md leading-5 hover:bg-blue-500 focus:bg-blue-500 hover:text-white "
-                    >Categories</a>
+                @foreach($categories as $category)
+                    <x-dropdown-item
+                        :active="isset($currentCategory) && $currentCategory->is($category)"
+                        href="/categories/{{ $category->slug }}"
+                    >{{ ucwords($category->name) }}</x-dropdown-item>
 
-                    @foreach($categories as $category)
-                        <a
-                            href="/categories/{{ $category->slug }}"
-                            class="
-                            block text-left px-3 text-md leading-5 hover:bg-blue-500 focus:bg-blue-500 hover:text-white
-                            {{ isset($currentCategory) && $currentCategory->is($category) ? 'bg-blue-500 text-white' : '' }}
-                            "
-                        >{{ ucwords($category->name) }}</a>
-
-                    @endforeach
-                </div>
-            </div>
+                @endforeach
+            </x-dropdown>
         </div>
 
 
