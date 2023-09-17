@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
+use function request;
 
 class PostController extends Controller
 {
     public function index()
     {
         return view('posts.index', [
-            'posts' => Post::latest()->filter(\request(['search', 'category', 'author']))->paginate(6)->withQueryString(
+            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString(
             ),
         ]);
     }

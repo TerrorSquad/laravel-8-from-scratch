@@ -41,11 +41,17 @@ class Post extends Model
         );
         $query->when(
             $filters['category'] ?? false,
-            fn(Builder $query, $category) => $query->whereHas('category', fn(Builder $query) => $query->where('slug', $category))
+            fn(Builder $query, $category) => $query->whereHas(
+                'category',
+                fn(Builder $query) => $query->where('slug', $category)
+            )
         );
         $query->when(
             $filters['author'] ?? false,
-            fn(Builder $query, $author) => $query->whereHas('author', fn(Builder $query) => $query->where('username', $author))
+            fn(Builder $query, $author) => $query->whereHas(
+                'author',
+                fn(Builder $query) => $query->where('username', $author)
+            )
         );
     }
 }

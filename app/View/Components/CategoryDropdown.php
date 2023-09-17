@@ -6,6 +6,7 @@ use App\Models\Category;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use function request;
 
 class CategoryDropdown extends Component
 {
@@ -17,7 +18,7 @@ class CategoryDropdown extends Component
     {
         return view('components.category-dropdown', [
             'categories' => Category::all(),
-            'currentCategory' => Category::firstWhere('slug', \request('category'))
+            'currentCategory' => Category::firstWhere('slug', request('category'))
         ]);
     }
 }
