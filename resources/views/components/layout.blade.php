@@ -22,9 +22,26 @@
             </a>
         </div>
 
-        <div class="mt-8 md:mt-0">
-            <a href="/"
-               class="text-xs font-bold uppercase">Home Page</a>
+        <div class="mt-8 md:mt-0 flex items-center text-xs font-bold uppercase">
+            @auth
+                <span>Welcome, {{ auth()->user()->name }}</span>
+
+                <form action="{{ route('sessions.destroy') }}"
+                      method="POST">
+                    @csrf
+
+                    <button type="submit"
+                            class="ml-3 rounded-full text-xs font-semibold text-blue-500 uppercase py-3 px-5"
+                    >
+                        Log out
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('register.create') }}"
+                   class="text-xs font-bold uppercase">Register</a>
+                <a href="{{ route('sessions.create') }}"
+                   class="ml-4 text-xs font-bold uppercase">Log In</a>
+            @endauth
 
             <a href="#"
                class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
