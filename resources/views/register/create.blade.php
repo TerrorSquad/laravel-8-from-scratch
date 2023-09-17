@@ -8,7 +8,7 @@
                   class="mt-10"
             >
                 @csrf
-                
+
                 <div class="mb-6 text-center">
                     <label for="name"
                            class="block mb-2 uppercase font-bold text-xs text-gray-700"
@@ -20,8 +20,13 @@
                             name="name"
                             id="name"
                             class="border border-gray-400 p-2 w-full lg:w-1/2"
+                            value="{{ old('name') }}"
                             required
                     >
+
+                    @error('name')
+                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-6 text-center">
@@ -35,8 +40,13 @@
                             name="username"
                             id="username"
                             class="border border-gray-400 p-2 w-full lg:w-1/2"
+                            value="{{ old('username') }}"
                             required
                     >
+
+                    @error('username')
+                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
 
 
@@ -51,8 +61,13 @@
                             name="email"
                             id="email"
                             class="border border-gray-400 p-2 w-full lg:w-1/2"
+                            value="{{ old('email') }}"
                             required
                     >
+
+                    @error('email')
+                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
 
 
@@ -69,7 +84,19 @@
                             class="border border-gray-400 p-2 w-full lg:w-1/2"
                             required
                     >
+
+                    @error('password')
+                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
+
+                {{--                @if($errors->any())--}}
+                {{--                    <ul class="mb-5">--}}
+                {{--                        @foreach($errors->all() as $error)--}}
+                {{--                            <li class="text-red-600 text-xs">{{ $error }}</li>--}}
+                {{--                        @endforeach--}}
+                {{--                    </ul>--}}
+                {{--                @endif--}}
 
                 <button type="submit"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
