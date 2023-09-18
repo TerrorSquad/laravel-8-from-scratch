@@ -13,9 +13,20 @@
         <div>
             <header class="mb-4">
                 <h3 class="font-bold">{{ $comment->author->name }}</h3>
-                <p class="text-xs">Posted
-                    <time>{{ $comment->created_at->diffForHumans() }}</time>
-                </p>
+                <div x-data="{ showFullDate: false}"
+                     @click="showFullDate = !showFullDate"
+                     class="text-xs"
+                     title="{{ $comment->created_at->format('Y-m-d H:i:s') }}"
+                >
+                    <div x-show="!showFullDate">
+                        <span>Posted</span>
+                        <time>{{ $comment->created_at->diffForHumans() }}</time>
+                    </div>
+                    <div x-show="showFullDate">
+                        <span>Posted at</span>
+                        <time>{{ $comment->created_at->format('Y-m-d H:i:s') }}</time>
+                    </div>
+                </div>
             </header>
             <p>
                 {{ $comment->body }}
