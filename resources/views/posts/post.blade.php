@@ -65,13 +65,13 @@
                     </div>
                 </div>
 
-                {{--     TODO: Make this section dynamic--}}
-                <section class="col-start-5 col-span-8 mt-10 space-y-6">
-                    <x-post-comment/>
-                    <x-post-comment/>
-                    <x-post-comment/>
-                </section>
-
+                @if ( $post->comments->count() > 1)
+                    <section class="col-start-5 col-span-8 mt-10 space-y-6">
+                        @foreach ($post->comments as $comment)
+                            <x-post-comment :comment="$comment"/>
+                        @endforeach
+                    </section>
+                @endif
             </article>
         </main>
 
