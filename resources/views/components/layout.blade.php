@@ -9,6 +9,11 @@
       rel="stylesheet">
 <script defer
         src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
 
 <body style="font-family: Open Sans, sans-serif">
 <section class="px-6 py-8">
@@ -43,7 +48,7 @@
                    class="ml-4 text-xs font-bold uppercase">Log In</a>
             @endauth
 
-            <a href="#"
+            <a href="#newsletter"
                class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                 Subscribe for Updates
             </a>
@@ -52,7 +57,8 @@
 
     {{ $slot }}
 
-    <footer class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
+    <footer id="newsletter"
+            class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
         <img src="/images/lary-newsletter-icon.svg"
              alt=""
              class="mx-auto -mb-6"
