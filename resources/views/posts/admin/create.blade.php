@@ -1,8 +1,12 @@
 <x-layout>
-    <section class="px-6 py-8">
-        <x-panel class="max-w-sm mx-auto">
+    <section class="max-w-md mx-auto">
+        <h1 class="text-lg font-bold mb-4">Publish a new post</h1>
+
+        <x-panel class="">
             <form method="POST"
-                  action="/admin/posts">
+                  action="/admin/posts"
+                  enctype="multipart/form-data"
+            >
                 @csrf
 
                 <div x-data="{ title: '{{ old('title') }}', slug: '{{ old('slug') }}' }">
@@ -47,7 +51,7 @@
                                x-model="title.toLowerCase().replaceAll(' ', '-')"
                                readonly
                         >
-                        
+
                         @error('slug')
                         <p class="
                                            text-red-500
@@ -55,6 +59,26 @@
                                            mt-2">{{ $message }}</p>
                         @enderror
                     </div>
+                </div>
+
+
+                <div>
+                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                           for="thumbnail">
+                        Thumbnail
+                    </label>
+
+                    <input type="file"
+                           name="thumbnail"
+                           id="thumbnail"
+                           required
+                           accept="image/jpeg, image/png"
+                           class="border border-gray-400 p-2 w-full">
+
+
+                    @error('thumbnail')
+                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
 
 
