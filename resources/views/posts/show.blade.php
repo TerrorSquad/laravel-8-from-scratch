@@ -9,10 +9,11 @@
                          alt=""
                          class="rounded-xl">
 
-                    <p class="mt-4 block text-gray-400 text-xs">
-                        Published
-                        <time>{{ $post->created_at->diffForHumans() }}</time>
-                    </p>
+                    <x-time-human-or-full class="mt-4"
+                                          :time="$post->created_at"
+                                          :human-time-message="'Published'"
+                                          :full-time-message="'Published at'"
+                    />
 
                     <div class="flex items-center lg:justify-center text-sm mt-4">
                         <img src="/images/lary-avatar.svg"

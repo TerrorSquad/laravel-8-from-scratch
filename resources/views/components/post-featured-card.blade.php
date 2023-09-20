@@ -3,7 +3,9 @@
     <div class="py-6 px-5 lg:flex">
         <div class="flex-1 lg:mr-8">
             {{-- TODO--}}
-            <img src="/images/illustration-1.png" alt="Blog Post illustration" class="rounded-xl">
+            <img src="/images/illustration-1.png"
+                 alt="Blog Post illustration"
+                 class="rounded-xl">
         </div>
 
         <div class="flex-1 flex flex-col justify-between">
@@ -18,10 +20,10 @@
                             {{ $post->title }}
                         </a>
                     </h1>
-
-                    <span class="mt-2 block text-gray-400 text-xs">
-                                        Published <time>{{ $post->created_at->diffForHumans() }}</time>
-                    </span>
+                    <x-time-human-or-full :time="$post->created_at"
+                                          :human-time-message="'Published'"
+                                          :full-time-message="'Published at'"
+                    />
                 </div>
             </header>
 
@@ -33,7 +35,8 @@
 
             <footer class="flex justify-between items-center mt-8">
                 <div class="flex items-center text-sm">
-                    <img src="/images/lary-avatar.svg" alt="Lary avatar">
+                    <img src="/images/lary-avatar.svg"
+                         alt="Lary avatar">
                     <div class="ml-3">
                         <h5 class="font-bold">
                             <a href="/?author={{ $post->author->username }}">
