@@ -27,25 +27,38 @@
             </a>
         </div>
 
-        <div class="mt-8 md:mt-0 flex items-center text-xs font-bold uppercase">
+        <div class="mt-8 md:mt-0 flex items-center">
             @auth
-                <span>Welcome, {{ auth()->user()->name }}</span>
+                <x-dropdown>
+                    <x-slot:trigger>
+                        <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}!</button>
+                    </x-slot:trigger>
 
-                <form action="{{ route('sessions.destroy') }}"
-                      method="POST">
-                    @csrf
+                    <x-dropdown-item href="/admin/posts" :active="request()->route()->getName() === 'admin.dashboard'">
+                        Dashboard
+                    </x-dropdown-item>
+                    <x-dropdown-item href="/admin/posts/create"
+                                     :active="request()->route()->getName() === 'admin.posts.create'">New
+                        Post
+                    </x-dropdown-item>
+                    <x-dropdown-item href="#" x-data="{}"
+                                     @click.prevent="document.querySelector('#logout-form').submit()">Log out
+                    </x-dropdown-item>
 
-                    <button type="submit"
-                            class="ml-3 rounded-full text-xs font-semibold text-blue-500 uppercase py-3 px-5"
-                    >
-                        Log out
-                    </button>
-                </form>
+                    <form id="logout-form"
+                          action="{{ route('sessions.destroy') }}"
+                          method="POST"
+                          class="hidden">
+                        @csrf
+                    </form>
+                </x-dropdown>
+
             @else
                 <a href="{{ route('register.create') }}"
-                   class="text-xs font-bold uppercase">Register</a>
+                   class="text-xs font-bold uppercase {{ request()->route()->getName() === 'register.create' ? 'text-blue-500' : '' }}">Register</a>
                 <a href="{{ route('sessions.create') }}"
-                   class="ml-4 text-xs font-bold uppercase">Log In</a>
+                   class="ml-4 text-xs font-bold uppercase  {{ request()->route()->getName() === 'sessions.create' ? 'text-blue-500' : '' }}">Log
+                    In</a>
             @endauth
 
             <a href="#newsletter"
