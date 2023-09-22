@@ -19,12 +19,10 @@
 <section class="px-6 py-8">
     <nav class="md:flex md:justify-between md:items-center">
         <div>
-            <a href="/">
-                <img src="/images/logo.svg"
-                     alt="Laracasts Logo"
-                     width="165"
-                     height="16">
-            </a>
+            <a href="/"> <img src="/images/logo.svg"
+                              alt="Laracasts Logo"
+                              width="165"
+                              height="16"> </a>
         </div>
 
         <div class="mt-8 md:mt-0 flex items-center">
@@ -34,14 +32,18 @@
                         <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}!</button>
                     </x-slot:trigger>
 
-                    <x-dropdown-item href="/admin/posts" :active="request()->route()->getName() === 'admin.dashboard'">
+                    @admin
+                    <x-dropdown-item href="{{ route('admin.posts.index') }}"
+                                     :active="request()->route()->getName() === 'admin.posts.index'">
                         Dashboard
                     </x-dropdown-item>
                     <x-dropdown-item href="/admin/posts/create"
-                                     :active="request()->route()->getName() === 'admin.posts.create'">New
-                        Post
+                                     :active="request()->route()->getName() === 'admin.posts.create'">New Post
                     </x-dropdown-item>
-                    <x-dropdown-item href="#" x-data="{}"
+                    @endadmin
+
+                    <x-dropdown-item href="#"
+                                     x-data="{}"
                                      @click.prevent="document.querySelector('#logout-form').submit()">Log out
                     </x-dropdown-item>
 
@@ -57,14 +59,11 @@
                 <a href="{{ route('register.create') }}"
                    class="text-xs font-bold uppercase {{ request()->route()->getName() === 'register.create' ? 'text-blue-500' : '' }}">Register</a>
                 <a href="{{ route('sessions.create') }}"
-                   class="ml-4 text-xs font-bold uppercase  {{ request()->route()->getName() === 'sessions.create' ? 'text-blue-500' : '' }}">Log
-                    In</a>
+                   class="ml-4 text-xs font-bold uppercase  {{ request()->route()->getName() === 'sessions.create' ? 'text-blue-500' : '' }}">Log In</a>
             @endauth
 
             <a href="#newsletter"
-               class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
-                Subscribe for Updates
-            </a>
+               class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5"> Subscribe for Updates </a>
         </div>
     </nav>
 
@@ -89,10 +88,8 @@
                     <div class="lg:py-3 lg:px-5 flex items-center">
                         <div>
                             <label for="email"
-                                   class="hidden lg:inline-block">
-                                <img src="/images/mailbox-icon.svg"
-                                     alt="mailbox letter">
-                            </label>
+                                   class="hidden lg:inline-block"> <img src="/images/mailbox-icon.svg"
+                                                                        alt="mailbox letter"> </label>
 
                             <input id="email"
                                    name="email"
@@ -109,8 +106,7 @@
                     </div>
 
                     <button type="submit"
-                            class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8"
-                    >
+                            class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8">
                         Subscribe
                     </button>
                 </form>

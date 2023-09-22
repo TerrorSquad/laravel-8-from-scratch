@@ -4,13 +4,7 @@
               action="{{ route('post.comment', $post) }}">
             @csrf
             <header class="flex items-center">
-
-                <img src="https://i.pravatar.cc/100?u={{ auth()->id() }}"
-                     alt=""
-                     width="40"
-                     height="40"
-                     class="rounded-full"
-                >
+                <x-image-author url="{{  auth()->user()->photo }}"/>
                 <h2 class="ml-4">Want to participate?</h2>
             </header>
 
@@ -36,14 +30,7 @@
 @else
     <p class="">
         <a href="{{ route('register.create') }}"
-           class="hover:underline font-semibold">
-            Register
-        </a>
-        or
-        <a href="{{ route('sessions.create') }}"
-           class="hover:underline font-semibold">
-            Login
-        </a>
-        to leave a comment.
+           class="hover:underline font-semibold"> Register </a> or <a href="{{ route('sessions.create') }}"
+                                                                      class="hover:underline font-semibold"> Login </a> to leave a comment.
     </p>
 @endauth

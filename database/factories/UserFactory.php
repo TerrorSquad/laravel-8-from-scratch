@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -17,6 +18,22 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $randomNumber = $this->faker->numberBetween(1, 1000);
+        $loopCount = 0;
+        $photo = '';
+        while (User::find($randomNumber)) {
+            $randomNumber = $this->faker->numberBetween(1, 1000);
+            $loopCount++;
+            if ($loopCount > 1000) {
+                $randomNumber = -1;
+                break;
+            }
+        }
+
+        if ($randomNumber !== -1) {
+            $photo = 'https://i.pravatar.cc/100?u=' . $randomNumber;
+        }
+
         return [
             'name' => fake()->name(),
             'username' => fake()->unique()->userName(),
@@ -24,6 +41,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'photo' => $photo,
         ];
     }
 

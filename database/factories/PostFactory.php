@@ -30,6 +30,7 @@ class PostFactory extends Factory
             'excerpt' => $excerpt,
             'body' => $body,
             'published_at' => fake()->dateTimeBetween('-1 year'),
+            'thumbnail' => "https://picsum.photos/id/" . random_int(1, 1000) . "/1000"
         ];
     }
 }
