@@ -14,14 +14,11 @@
                           type="file"
                           accept="image/*"
                           required/>
+
             <x-form.textarea name="excerpt"
-                             required/>
+                             required>{{ old('excerpt') }}</x-form.textarea>
             <x-form.textarea name="body"
-                             required/>
-            <x-form.input name="published_at"
-                          type="datetime-local"
-                          required
-                          hidden/>
+                             required>{{ old('body') }}</x-form.textarea>
 
             <x-form.field>
                 <x-form.label name="category"/>

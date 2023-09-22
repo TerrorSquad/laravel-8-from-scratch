@@ -29,7 +29,7 @@ class AdminPostController extends Controller
 
         $post->update($attributes);
 
-        return back()->with('success', 'Post Updated!');
+        return redirect(route('admin.posts.edit', ['post' => $post]))->with('success', 'Post Updated!');
     }
 
     protected function validatePost(?Post $post = null): array
@@ -43,7 +43,6 @@ class AdminPostController extends Controller
             'excerpt' => 'required',
             'body' => 'required',
             'category_id' => ['required', Rule::exists('categories', 'id')],
-            'published_at' => 'required'
         ]);
     }
 
