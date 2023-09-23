@@ -8,34 +8,35 @@ primary_region = "otp"
 console_command = "php /var/www/html/artisan tinker"
 
 [build]
-  [build.args]
-    NODE_VERSION = "18"
-    PHP_VERSION = "8.2"
+[build.args]
+NODE_VERSION = "18"
+PHP_VERSION = "8.2"
 
 [env]
-  APP_NAME = "Laracasts Blog"
-  APP_ENV = "production"
-  DB_CONNECTION = "mysql"
-  DB_HOST = "laracasts-blog-mysql.internal"
-  DB_DATABASE= "laracasts_blog"
-  LOG_CHANNEL = "stderr"
-  LOG_LEVEL = "info"
-  LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
-  SESSION_DRIVER = "cookie"
-  SESSION_SECURE_COOKIE = "true"
-  FILESYSTEM_DISK = "public"
+APP_NAME = "Laracasts Blog"
+APP_URL = "https://laracasts-blog.fly.dev"
+APP_ENV = "production"
+DB_CONNECTION = "mysql"
+DB_HOST = "laracasts-blog-mysql.internal"
+DB_DATABASE = "laracasts_blog"
+LOG_CHANNEL = "stderr"
+LOG_LEVEL = "info"
+LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
+SESSION_DRIVER = "cookie"
+SESSION_SECURE_COOKIE = "true"
+FILESYSTEM_DISK = "public"
 
 [http_service]
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ["app"]
+internal_port = 8080
+force_https = true
+auto_stop_machines = true
+auto_start_machines = true
+min_machines_running = 0
+processes = ["app"]
 
 [mounts]
-  source="laracasts_blog_storage"
-  destination="/var/www/html/storage"
+source = "laracasts_blog_storage"
+destination = "/var/www/html/storage"
 
 [deploy]
-  release_command = "php /var/www/html/artisan migrate --force"
+release_command = "php /var/www/html/artisan migrate --force"
