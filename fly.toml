@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for laracasts-blog on 2023-09-23T02:07:12+02:00
+# fly.toml app configuration file generated for laracasts-blog on 2023-09-23T20:48:42+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -12,20 +12,27 @@ console_command = "php /var/www/html/artisan tinker"
 NODE_VERSION = "18"
 PHP_VERSION = "8.2"
 
+[deploy]
+release_command = "php /var/www/html/artisan migrate --force"
+
 [env]
+APP_ENV = "production"
 APP_NAME = "Laracasts Blog"
 APP_URL = "https://laracasts-blog.fly.dev"
-APP_ENV = "production"
 DB_CONNECTION = "mysql"
-DB_HOST = "laracasts-blog-mysql.internal"
 DB_DATABASE = "laracasts_blog"
+DB_HOST = "laracasts-blog-mysql.internal"
 DB_USERNAME = "admin"
+FILESYSTEM_DISK = "public"
 LOG_CHANNEL = "stderr"
 LOG_LEVEL = "info"
 LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
 SESSION_DRIVER = "cookie"
 SESSION_SECURE_COOKIE = "true"
-FILESYSTEM_DISK = "public"
+
+[[mounts]]
+source = "laracasts_blog_storage"
+destination = "/var/www/html/storage"
 
 [http_service]
 internal_port = 8080
@@ -34,10 +41,3 @@ auto_stop_machines = true
 auto_start_machines = true
 min_machines_running = 0
 processes = ["app"]
-
-[mounts]
-source = "laracasts_blog_storage"
-destination = "/var/www/html/storage"
-
-[deploy]
-release_command = "php /var/www/html/artisan migrate --force"

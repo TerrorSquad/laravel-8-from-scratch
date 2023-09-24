@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for laracasts-blog-mysql on 2023-09-23T02:25:35+02:00
+# fly.toml app configuration file generated for laracasts-blog-mysql on 2023-09-23T20:31:56+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -6,22 +6,16 @@
 app = "laracasts-blog-mysql"
 primary_region = "otp"
 
-[processes]
-app = """--datadir /data/mysql \
-  --default-authentication-plugin mysql_native_password \
-  --performance-schema=OFF \
-  --innodb-buffer-pool-size 64M"""
-
-[mounts]
-  source="laracasts_blog_mysql"
-  destination="/data"
+[build]
+  image = "mysql:8.0.32"
 
 [env]
   MYSQL_DATABASE = "laracasts_blog"
   MYSQL_USER = "admin"
 
-# As of 04/25/2023:
-# MySQL 8.0.33 has a bug in it
-# so avoid that specific version
-[build]
-  image = "mysql:8.0.32"
+[processes]
+  app = "--datadir /data/mysql --default-authentication-plugin mysql_native_password --performance-schema=OFF --innodb-buffer-pool-size 64M"
+
+[[mounts]]
+  source = "laracasts_blog_mysql"
+  destination = "/data"
