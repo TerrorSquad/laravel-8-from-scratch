@@ -43,7 +43,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
-    
+
     // This is a mutator. It will automatically be called when you set the password attribute on the user model.
     // It works by taking the password attribute and passing it to the bcrypt() function.
     // Same as $cast = ['password' => 'hashed']

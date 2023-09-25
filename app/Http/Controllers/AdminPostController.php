@@ -32,20 +32,6 @@ class AdminPostController extends Controller
         return redirect(route('admin.posts.edit', ['post' => $post]))->with('success', 'Post Updated!');
     }
 
-    protected function validatePost(?Post $post = null): array
-    {
-        $post ??= new Post();
-
-        return request()->validate([
-            'title' => 'required',
-            'thumbnail' => $post->exists ? ['image'] : ['required', 'image'],
-            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post)],
-            'excerpt' => 'required',
-            'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')],
-        ]);
-    }
-
     public function store()
     {
         Post::create(
@@ -70,5 +56,19 @@ class AdminPostController extends Controller
         $post->delete();
 
         return back()->with('success', 'Post Deleted!');
+    }
+
+    protected function validatePost(?Post $post = null): array
+    {
+        $post ??= new Post();
+
+        return request()->validate([
+            'title' => 'required',
+            'thumbnail' => $post->exists ? ['image'] : ['required', 'image'],
+            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post)],
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+        ]);
     }
 }
