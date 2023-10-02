@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+
 use function request;
 
 class PostController extends Controller
@@ -20,8 +21,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return view('posts.show', [
-            'post' => $post
+            'post' => $post,
         ]);
     }
-
 }

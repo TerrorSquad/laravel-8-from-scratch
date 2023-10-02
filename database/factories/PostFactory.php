@@ -19,8 +19,8 @@ class PostFactory extends Factory
     public function definition(): array
     {
         $paragraphs = $this->faker->paragraphs(random_int(4, 8));
-        $body = collect($paragraphs)->map(fn($paragraph) => "<p>$paragraph</p>")->implode('');
-        $excerpt = collect($paragraphs)->take(2)->map(fn($paragraph) => "<p>$paragraph</p>")->implode('');
+        $body = collect($paragraphs)->map(fn ($paragraph) => "<p>$paragraph</p>")->implode('');
+        $excerpt = collect($paragraphs)->take(2)->map(fn ($paragraph) => "<p>$paragraph</p>")->implode('');
 
         return [
             'user_id' => User::factory(),
@@ -30,7 +30,7 @@ class PostFactory extends Factory
             'excerpt' => $excerpt,
             'body' => $body,
             'published_at' => fake()->dateTimeBetween('-1 year'),
-            'thumbnail' => "https://picsum.photos/id/" . random_int(1, 1000) . "/1000"
+            'thumbnail' => 'https://picsum.photos/id/'.random_int(1, 1000).'/1000',
         ];
     }
 }

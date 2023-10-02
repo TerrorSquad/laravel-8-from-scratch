@@ -8,7 +8,9 @@ use MailchimpMarketing\ApiClient;
 
 class MailchimpNewsletter implements NewsletterInterface
 {
-    public function __construct(protected ApiClient $client) {}
+    public function __construct(protected ApiClient $client)
+    {
+    }
 
     public function subscribe(string $email, string $list = null)
     {

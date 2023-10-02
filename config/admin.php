@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 return [
     'administrators' => [
-        'emails' => explode(',', env('ADMINISTRATORS', ''))
-    ]
+        'emails' => explode(',', env('ADMINISTRATORS', '')),
+    ],
 ];

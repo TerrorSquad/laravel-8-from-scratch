@@ -20,7 +20,7 @@ class SessionsController extends Controller
     {
         $attributes = request()->validate([
             'email' => ['required', 'email'],
-            'password' => ['required']
+            'password' => ['required'],
         ]);
 
         if (auth()->attempt($attributes)) {

@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $userJohnDoe = User::factory()->create([
-            'name' => 'John Doe'
+            'name' => 'John Doe',
         ]);
 
         Post::factory(3)->create([
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $userJaneDoe = User::factory()->create([
-            'name' => 'Jane Doe'
+            'name' => 'Jane Doe',
         ]);
 
         Post::factory(3)->create([
