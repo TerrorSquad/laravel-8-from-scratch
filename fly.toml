@@ -1,43 +1,48 @@
-# fly.toml app configuration file generated for laracasts-blog on 2023-09-23T20:48:42+02:00
+# fly.toml app configuration file generated for laracasts-blog on 2024-03-22T19:39:27+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "laracasts-blog"
-primary_region = "otp"
-console_command = "php /var/www/html/artisan tinker"
+app = 'laracasts-blog'
+primary_region = 'otp'
+console_command = 'php /var/www/html/artisan tinker'
 
 [build]
-[build.args]
-NODE_VERSION = "18"
-PHP_VERSION = "8.2"
+  [build.args]
+    NODE_VERSION = '18'
+    PHP_VERSION = '8.2'
 
 [deploy]
-release_command = "php /var/www/html/artisan migrate --force"
+  release_command = 'php /var/www/html/artisan migrate --force'
 
 [env]
-APP_ENV = "production"
-APP_NAME = "Laracasts Blog"
-APP_URL = "https://laracasts-blog.fly.dev"
-DB_CONNECTION = "mysql"
-DB_DATABASE = "laracasts_blog"
-DB_HOST = "laracasts-blog-mysql.internal"
-DB_USERNAME = "admin"
-FILESYSTEM_DISK = "public"
-LOG_CHANNEL = "stderr"
-LOG_LEVEL = "info"
-LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
-SESSION_DRIVER = "cookie"
-SESSION_SECURE_COOKIE = "true"
+  APP_ENV = 'production'
+  APP_NAME = 'Laracasts Blog'
+  APP_URL = 'https://laracasts-blog.fly.dev'
+  DB_CONNECTION = 'mysql'
+  DB_DATABASE = 'laracasts_blog'
+  DB_HOST = 'laracasts-blog-mysql.internal'
+  DB_USERNAME = 'admin'
+  FILESYSTEM_DISK = 'public'
+  LOG_CHANNEL = 'stderr'
+  LOG_LEVEL = 'info'
+  LOG_STDERR_FORMATTER = 'Monolog\Formatter\JsonFormatter'
+  SESSION_DRIVER = 'cookie'
+  SESSION_SECURE_COOKIE = 'true'
 
 [[mounts]]
-source = "laracasts_blog_storage"
-destination = "/var/www/html/storage"
+  source = 'laracasts_blog_storage'
+  destination = '/var/www/html/storage'
 
 [http_service]
-internal_port = 8080
-force_https = true
-auto_stop_machines = true
-auto_start_machines = true
-min_machines_running = 0
-processes = ["app"]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

@@ -11,13 +11,13 @@
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
--   [Simple, fast routing engine](https://laravel.com/docs/routing).
--   [Powerful dependency injection container](https://laravel.com/docs/container).
--   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
--   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
--   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
--   [Robust background job processing](https://laravel.com/docs/queues).
--   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
@@ -31,9 +31,9 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Lar
 
 # Requirements
 
--   Docker and Docker Compose
--   PHP 8.1+
--   Composer
+- Docker and Docker Compose
+- PHP 8.1+
+- Composer
 
 # Installation
 
@@ -44,3 +44,23 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Lar
 5. Run `./vendor/bin/sail artisan key:generate`
 6. Run `./vendor/bin/sail artisan migrate`
 7. Run `./vendor/bin/sail artisan db:seed`
+
+# Deployment to fly.io
+
+- Install flyctl
+- Authenticate with flyctl
+- Open the `fly/applications/mysql` directory and run `flyctl launch`
+    3.1 If you want, change the name of the app
+    3.2 Once the app is created in fly.io, add the following two secrets:
+  - `MYSQL_PASSWORD`
+  - `MYSQL_ROOT_PASSWORD`
+    - You can do it from here: <https://fly.io/sites/your-app-name/secrets>, e.g. <https://fly.io/apps/laracasts-blog-mysql/secrets>
+- Run `flyctl deploy`
+
+- Inside of the root directory, run `flyctl launch`
+  - If you want, change the name of the app
+  - Once the app is created in fly.io, add the following two secrets:
+    - `DB_PASSWORD` (the same as `MYSQL_PASSWORD`)
+      - You can do it from here: <https://fly.io/sites/your-app-name/secrets>, e.g. <https://fly.io/apps/laracasts-blog/secrets>
+- Run `flyctl deploy`
+- Visit the app URL: <https://laracasts-blog.fly.dev>

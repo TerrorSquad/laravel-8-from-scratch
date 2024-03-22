@@ -1,21 +1,26 @@
-# fly.toml app configuration file generated for laracasts-blog-mysql on 2023-09-23T20:31:56+02:00
+# fly.toml app configuration file generated for laracasts-blog-mysql on 2024-03-22T19:34:38+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "laracasts-blog-mysql"
-primary_region = "otp"
+app = 'laracasts-blog-mysql'
+primary_region = 'otp'
 
 [build]
-  image = "mysql:8.0.32"
+  image = 'mysql:8.0.32'
 
 [env]
-  MYSQL_DATABASE = "laracasts_blog"
-  MYSQL_USER = "admin"
+  MYSQL_DATABASE = 'laracasts_blog'
+  MYSQL_USER = 'admin'
 
 [processes]
-  app = "--datadir /data/mysql --default-authentication-plugin mysql_native_password --performance-schema=OFF --innodb-buffer-pool-size 64M"
+  app = '--datadir /data/mysql --default-authentication-plugin mysql_native_password --performance-schema=OFF --innodb-buffer-pool-size 64M'
 
 [[mounts]]
-  source = "laracasts_blog_mysql"
-  destination = "/data"
+  source = 'laracasts_blog_mysql'
+  destination = '/data'
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
